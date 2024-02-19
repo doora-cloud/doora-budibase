@@ -17,9 +17,12 @@ services:
       - internal
       - nginx
     depends_on:
-      - app
-      - worker
-      - db
+      app:
+        condition: service_started
+      worker:
+        condition: service_started
+      db:
+        condition: service_started
   app:
     image: budibase.docker.scarf.sh/budibase/apps
     restart: always
